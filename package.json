@@ -1,7 +1,7 @@
 {
     "name": "bb-sandbox",
     "version": "1.0.0",
-    "license" : "GNU General Public License (GPL)",
+    "license": "GNU General Public License (GPL)",
     "private": true,
     "scripts": {
         "docker:up": "docker-compose up",
@@ -9,7 +9,7 @@
         "sonar": "mvn clean verify sonar:sonar",
         "test": "mvn clean package verify",
         "package": "mvn clean package",
-        "dev": "mvn quarkus:dev"
+        "dev": "mvn liberty:run"
     },
     "config": {
         "commitizen": {
