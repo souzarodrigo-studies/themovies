@@ -19,8 +19,8 @@ import themovies.helpers.convert.LocalDateDeserializer;
 import themovies.helpers.convert.LocalDateSerializer;
 
 @Entity
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Table(name = "movie")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class MovieModel implements Serializable {
 
     /**
