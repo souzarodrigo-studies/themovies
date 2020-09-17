@@ -1,4 +1,4 @@
-package themovies.helpers.metric;
+package themovies.helpers.exception;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import themovies.helpers.error.ErroNegocialException;
 import themovies.helpers.error.ListaErro;
-
 
 @Provider
 public class ExceptionsErroNegocialFilter implements ExceptionMapper<ErroNegocialException> {

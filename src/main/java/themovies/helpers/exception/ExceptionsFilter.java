@@ -1,4 +1,4 @@
-package themovies.helpers.metric;
+package themovies.helpers.exception;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -12,13 +12,12 @@ import themovies.helpers.error.ListaErro;
 import themovies.helpers.models.EnumMensagens;
 import themovies.helpers.models.Erro;
 
-
 @Provider
 public class ExceptionsFilter implements ExceptionMapper<Exception> {
 
     protected static final String LINHA = " - linha: ";
     protected static final String PONTO = ".";
-    protected static final String PACKAGE_NAME = "br.com.bb.vip";
+    protected static final String PACKAGE_NAME = "themovies";
 
     private static final Logger LOG = LoggerFactory.getLogger(ExceptionsFilter.class);
 
