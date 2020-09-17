@@ -30,14 +30,13 @@ public class MetricaFilter implements ContainerRequestFilter, ContainerResponseF
     private MetricRegistry registry;
 
     private static final String METRIC_HTTP_REQUESTS_COUNTER_NAME = "http_requests_counter";
-    private static final String METRIC_HTTP_RESPONSE_COUNTER_NAME = "http_response_counter​";
+    private static final String METRIC_HTTP_RESPONSE_COUNTER_NAME = "http_response_counter";
     private static final String METRIC_HTTP_TIMER_NAME = "http_requests_seconds_summary";
     private static final String TIMER_INIT_TIME_MILLISECONDS = "http_init_timer_request_milliseconds";
 
     private static final String PATH = "path";
     private static final String STATUS = "status";
     private static final String METHOD = "method";
-    // private static final String APP_VERSION = "appVersion";
 
     @Override
     public void filter(ContainerRequestContext request) {

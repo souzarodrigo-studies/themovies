@@ -5,7 +5,6 @@ import org.hibernate.JDBCException;
 import themovies.helpers.models.EnumMensagens;
 import themovies.helpers.models.Erro;
 
-
 public class ErroSqlException extends ErroNegocialException {
 
     /**
@@ -34,9 +33,8 @@ public class ErroSqlException extends ErroNegocialException {
         super(EnumMensagens.ERRO_SQL.getMensagem(), e.getCause());
         Integer code = -1;
         String sqlQuery = "";
-        String motivo;
 
-        if (e.getCause() != null && e.getCause() instanceof JDBCException) {
+        if (e.getCause() instanceof JDBCException) {
             JDBCException jdbcException = (JDBCException) e.getCause();
 
             if (jdbcException.getSQLException() != null) {
@@ -56,7 +54,6 @@ public class ErroSqlException extends ErroNegocialException {
             motivo = e.getMessage();
         }
         this.sqlCode = code.toString();
-        this.motivo = motivo;
         this.query = sqlQuery;
     }
 

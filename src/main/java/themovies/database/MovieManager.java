@@ -26,9 +26,7 @@ public class MovieManager implements MovieRepository {
     @Override
     public List<MovieModel> findAll() {
 
-        List<MovieModel> movies = em.createQuery(" SELECT p FROM MovieModel p", MovieModel.class).getResultList();
-
-        return movies;
+        return em.createQuery(" SELECT p FROM MovieModel p", MovieModel.class).getResultList();
 
     }
 
