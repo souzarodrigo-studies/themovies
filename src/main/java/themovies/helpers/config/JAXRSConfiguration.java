@@ -1,4 +1,4 @@
-package themovies;
+package themovies.helpers.config;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
