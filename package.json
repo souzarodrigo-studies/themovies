@@ -6,6 +6,9 @@
     "scripts": {
         "docker:up": "docker-compose up",
         "docker:down": "docker-compose down",
+        "docker:remove": "docker rm -f themovies",
+        "docker:build": "mvn clean package && docker build -t themovies/themovies .",
+        "docker:run": "docker run -d -p 9080:9080 -p 9443:9443 --name themovies themovies/themovies",
         "sonar": "mvn clean verify sonar:sonar",
         "test": "mvn clean package verify",
         "package": "mvn clean package",
