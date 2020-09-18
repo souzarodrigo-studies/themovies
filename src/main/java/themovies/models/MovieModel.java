@@ -2,7 +2,6 @@ package themovies.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -149,36 +148,6 @@ public class MovieModel implements Serializable {
      */
     public void setDuration(Long duration) {
         this.duration = duration;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(description, director, duration, id, imdbRate, releaseDate, title);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof MovieModel))
-            return false;
-        MovieModel other = (MovieModel) obj;
-        return Objects.equals(description, other.description) && Objects.equals(director, other.director)
-                && Objects.equals(duration, other.duration) && Objects.equals(id, other.id)
-                && Objects.equals(imdbRate, other.imdbRate) && Objects.equals(releaseDate, other.releaseDate)
-                && Objects.equals(title, other.title);
     }
 
 }
