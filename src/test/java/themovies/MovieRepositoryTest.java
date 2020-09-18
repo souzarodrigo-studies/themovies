@@ -2,16 +2,20 @@ package themovies;
 
 import themovies.database.MovieManager;
 import themovies.models.MovieModel;
+import themovies.repositories.MovieRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class MovieRepositoryTest {
 
     @InjectMocks
@@ -28,6 +33,9 @@ public class MovieRepositoryTest {
 
     @Mock
     EntityManager entityManager;
+
+    @Mock
+    MovieRepository repository;
 
     MovieModel entityMock = new MovieModel();
 
@@ -79,6 +87,7 @@ public class MovieRepositoryTest {
     }
 
     @Test
+    @Transactional
     @DisplayName("Testing the execution of the repository returning the data by save")
     public void SaveRepositoryTest() {
 
