@@ -74,7 +74,7 @@ public class MovieManager implements MovieRepository {
         em.getTransaction().commit();
 
     }
-
+ 
     @Override
     public void delete(MovieModel entity) {
 

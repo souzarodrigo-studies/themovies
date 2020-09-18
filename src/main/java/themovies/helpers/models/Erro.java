@@ -166,10 +166,10 @@ public class Erro {
                 erro = new Erro(this.enumMensagens, this.source);
             }
 
-            erro.setMessage(String.format(erro.getMessage(), messageArgs));
-            erro.setDeveloperMessage(String.format(erro.getDeveloperMessage(), developerMessageArgs));
-            erro.setUserHelp(String.format(erro.getUserHelp(), userHelpArgs));
-            erro.setMoreInfo(String.format(erro.getMoreInfo(), moreInfoArgs));
+            erro.setMessage(String.format(erro.getMessage(), (Object[]) messageArgs));
+            erro.setDeveloperMessage(String.format(erro.getDeveloperMessage(), (Object[]) developerMessageArgs));
+            erro.setUserHelp(String.format(erro.getUserHelp(), (Object[]) userHelpArgs));
+            erro.setMoreInfo(String.format(erro.getMoreInfo(), (Object[]) moreInfoArgs));
             erro.setSequential(String.valueOf(this.sequential));
 
             return erro;

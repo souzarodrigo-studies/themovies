@@ -29,17 +29,11 @@ public class MovieRepositoryTest {
     @Mock
     EntityManager entityManager;
 
+    MovieModel entityMock = new MovieModel();
+
     @Before
     public void begin() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    @DisplayName("Deve Testar o repository findbyId")
-    public void listAllrepositoryTest() {
-        List<MovieModel> movieEntityList = new ArrayList<>();
-
-        MovieModel entityMock = new MovieModel();
 
         entityMock.setId(1L);
         entityMock.setImdbRate(10l);
@@ -49,6 +43,14 @@ public class MovieRepositoryTest {
         entityMock.setTitle("Lord of the rings - The Fellowship of the ring");
         entityMock.setDescription(
                 "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    @DisplayName("Testing the execution of the repository returning the data by list all")
+    public void listAllrepositoryTest() {
+        List<MovieModel> movieEntityList = new ArrayList<>();
 
         movieEntityList.add(entityMock);
 
@@ -65,19 +67,8 @@ public class MovieRepositoryTest {
     }
 
     @Test
-    @DisplayName("Deve Testar o repository findbyId")
+    @DisplayName("Testing the execution of the repository returning the data by find by id")
     public void findByIdRepositoryTest() {
-
-        MovieModel entityMock = new MovieModel();
-
-        entityMock.setId(1L);
-        entityMock.setImdbRate(10l);
-        entityMock.setDuration(178l);
-        entityMock.setDirector("Peter Jackson");
-        entityMock.setReleaseDate(LocalDate.now());
-        entityMock.setTitle("Lord of the rings - The Fellowship of the ring");
-        entityMock.setDescription(
-                "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
 
         when(entityManager.find(MovieModel.class, 1L)).thenReturn(entityMock);
 
@@ -85,6 +76,49 @@ public class MovieRepositoryTest {
 
         assertNotNull(entity);
         assertEquals(Optional.of(entityMock), entity);
+    }
+
+    @Test
+    @DisplayName("Testing the execution of the repository returning the data by save")
+    public void SaveRepositoryTest() {
+
+        entityManager.persist(entityMock);
+
+        assertNotNull(entityMock);
+
+    }
+
+    @Test
+    @DisplayName("Testing the execution of the repository returning the data by delete")
+    public void DeleteRepositoryTest() {
+
+        entityManager.remove(entityMock);
+
+        assertNotNull(entityMock);
+
+    }
+
+    @Test
+    @DisplayName("Testing the execution of the repository returning the data by update")
+    public void UpdateRepositoryTest() {
+
+        MovieModel mock = new MovieModel();
+        mock.setId(1L);
+        mock.setImdbRate(10l);
+        mock.setDuration(178l);
+        mock.setDirector("Peter Jackson e Rodrigo SS");
+        mock.setReleaseDate(LocalDate.now());
+        mock.setTitle("Lord of the rings - The Fellowship of the ring");
+        mock.setDescription(
+                "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+        when(resource.findById(entityMock.getId())).thenReturn(Optional.of(entityMock));
+
+        entityManager.merge(mock);
+
+        assertNotNull(mock);
+        assertNotEquals(entityMock, mock);
+
     }
 
 }

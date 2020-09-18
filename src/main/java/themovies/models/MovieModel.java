@@ -54,32 +54,6 @@ public class MovieModel implements Serializable {
     private Long duration;
 
     /**
-     * 
-     */
-    public MovieModel() {
-    }
-
-    /**
-     * @param id
-     * @param title
-     * @param director
-     * @param releaseDate
-     * @param imdbRate
-     * @param description
-     * @param duration
-     */
-    public MovieModel(Long id, String title, String director, LocalDate releaseDate, Long imdbRate, String description,
-            Long duration) {
-        this.id = id;
-        this.title = title;
-        this.director = director;
-        this.releaseDate = releaseDate;
-        this.imdbRate = imdbRate;
-        this.description = description;
-        this.duration = duration;
-    }
-
-    /**
      * @return the id
      */
     public Long getId() {
