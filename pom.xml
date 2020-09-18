@@ -136,6 +136,21 @@
             <version>2.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.microprofile-ext.health-ext</groupId>
+            <artifactId>healthprobe-jvm</artifactId>
+            <version>1.0.5</version>
+            <scope>runtime</scope>
+        </dependency>
+            
+        <dependency>
+            <groupId>org.microprofile-ext.health-ext</groupId>
+            <artifactId>health-ui</artifactId>
+            <version>1.0.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+
     </dependencies>
 
 

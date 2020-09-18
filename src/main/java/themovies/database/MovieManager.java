@@ -58,23 +58,27 @@ public class MovieManager implements MovieRepository {
     }
 
     @Override
-    public void save(MovieModel entity) {
+    public MovieModel save(MovieModel entity) {
 
         em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
 
+        return entity;
+
     }
 
     @Override
-    public void update(MovieModel entity) {
+    public MovieModel update(MovieModel entity) {
 
         em.getTransaction().begin();
         em.merge(entity);
         em.getTransaction().commit();
 
+        return entity;
+
     }
- 
+
     @Override
     public void delete(MovieModel entity) {
 

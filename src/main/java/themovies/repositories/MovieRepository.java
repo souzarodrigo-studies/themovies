@@ -13,9 +13,9 @@ public interface MovieRepository {
 
     Optional<MovieModel> findByNome(MovieModel entity);
 
-    void save(MovieModel entity);
+    MovieModel save(MovieModel entity);
 
-    void update(MovieModel entity);
+    MovieModel update(MovieModel entity);
 
     void delete(MovieModel entity);
 
