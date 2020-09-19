@@ -2,6 +2,7 @@ package themovies;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -40,7 +41,7 @@ public class MovieServiceTest {
     @DisplayName("Testing the execution of the repository returning the data by list")
     public void listRepositoryTest() {
 
-        MovieModel entityMock = new MovieModel();
+        final MovieModel entityMock = new MovieModel();
         entityMock.setId(1L);
         entityMock.setImdbRate(10l);
         entityMock.setDuration(178l);
@@ -52,7 +53,7 @@ public class MovieServiceTest {
 
         when(repository.save(any(MovieModel.class))).thenReturn(new MovieModel());
 
-        List<MovieModel> entity = resource.listAll();
+        final List<MovieModel> entity = resource.listAll();
 
         assertNotNull(entity);
     }
@@ -61,7 +62,7 @@ public class MovieServiceTest {
     @DisplayName("Testing the execution of the repository returning the data by find by name")
     public void findByNameRepositoryTest() {
 
-        MovieModel entity = new MovieModel();
+        final MovieModel entity = new MovieModel();
         entity.setId(1L);
         entity.setImdbRate(10l);
         entity.setDuration(178l);
@@ -71,16 +72,61 @@ public class MovieServiceTest {
         entity.setDescription(
                 "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
 
-        Boolean a = resource.validByName(entity);
+        final Boolean a = resource.validByName(entity);
 
         assertEquals(false, a);
+    }
+
+    @Test
+    @DisplayName("Testing the execution of the repository returning the data by find by id")
+    public void findByIdRepositoryTest() throws ResourceAPIException {
+
+        final MovieModel entity = new MovieModel();
+        entity.setId(1L);
+        entity.setImdbRate(10l);
+        entity.setDuration(178l);
+        entity.setDirector("Peter Jackson");
+        entity.setReleaseDate(LocalDate.now());
+        entity.setTitle("Lord of the rings - The Fellowship of the ring");
+        entity.setDescription(
+                "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+        when(this.repository.findById(entity.getId())).thenReturn(Optional.of(entity));
+
+        MovieModel response = resource.findById(1l);
+
+        assertNotNull(response);
+        assertEquals(response, entity);
+    }
+
+    @Test
+    @DisplayName("Testing the execution of the repository returning the data by find by id")
+    public void findByIdRepositoryTestError() throws ResourceAPIException {
+
+        assertThrows(ResourceAPIException.class, () -> {
+            final MovieModel entity = new MovieModel();
+            entity.setId(1L);
+            entity.setImdbRate(10l);
+            entity.setDuration(178l);
+            entity.setDirector("Peter Jackson");
+            entity.setReleaseDate(LocalDate.now());
+            entity.setTitle("Lord of the rings - The Fellowship of the ring");
+            entity.setDescription(
+                    "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+            // when(repository.save(any(MovieModel.class))).thenReturn(new MovieModel());
+
+            MovieModel movie = resource.findById(1l);
+
+            assertNotNull(movie);
+        });
     }
 
     @Test
     @DisplayName("Testing the execution of the repository returning the data by save")
     public void saveRepositoryTest() {
 
-        MovieModel entityMock = new MovieModel();
+        final MovieModel entityMock = new MovieModel();
         entityMock.setId(1L);
         entityMock.setImdbRate(10l);
         entityMock.setDuration(178l);
@@ -90,7 +136,7 @@ public class MovieServiceTest {
         entityMock.setDescription(
                 "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
 
-        MovieModel entity = resource.save(entityMock);
+        final MovieModel entity = resource.save(entityMock);
 
         assertNotNull(entity);
         assertEquals(entity.getId(), entity.getId());
@@ -107,7 +153,7 @@ public class MovieServiceTest {
     @DisplayName("Deve Testar um delete de um filme no banco")
     public void deleteTest() throws ResourceAPIException {
 
-        MovieModel mock = new MovieModel();
+        final MovieModel mock = new MovieModel();
         mock.setId(1L);
         mock.setImdbRate(10l);
         mock.setDuration(178l);
@@ -128,7 +174,7 @@ public class MovieServiceTest {
     @DisplayName(" Deve testar a atualizaçao de um filme no banco de dados")
     public void updateTest() throws ResourceAPIException {
 
-        MovieModel mock = new MovieModel();
+        final MovieModel mock = new MovieModel();
         mock.setId(1L);
         mock.setImdbRate(10l);
         mock.setDuration(178l);
@@ -142,10 +188,90 @@ public class MovieServiceTest {
 
         mock.setDirector("Peter Jackson");
 
-        MovieModel response = resource.update(mock);
+        final MovieModel response = resource.update(mock);
 
         assertNotNull(response);
         assertEquals(response, mock);
+
+    }
+
+    @Test
+    @DisplayName(" Deve testar a atualizaçao de um filme no banco de dados")
+    public void updateTestError() {
+
+        assertThrows(ResourceAPIException.class, () -> {
+            final MovieModel mock = new MovieModel();
+            mock.setId(1L);
+            mock.setImdbRate(10l);
+            mock.setDuration(178l);
+            mock.setDirector(null);
+            mock.setReleaseDate(LocalDate.now());
+            mock.setTitle("Lord of the rings - The Fellowship of the ring");
+            mock.setDescription(
+                    "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+            mock.setDirector("Peter Jackson");
+            resource.update(mock);
+        });
+
+        assertThrows(ResourceAPIException.class, () -> {
+            final MovieModel mock = new MovieModel();
+            mock.setId(1L);
+            mock.setImdbRate(10l);
+            mock.setDuration(178l);
+            mock.setDirector("Peter Jackson e Rodrigo SS");
+            mock.setReleaseDate(LocalDate.now());
+            mock.setTitle(null);
+            mock.setDescription(
+                    "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+            mock.setDirector("Peter Jackson");
+            resource.update(mock);
+        });
+
+        assertThrows(ResourceAPIException.class, () -> {
+            final MovieModel mock = new MovieModel();
+            mock.setId(1L);
+            mock.setImdbRate(10l);
+            mock.setDuration(178l);
+            mock.setDirector("Peter Jackson e Rodrigo SS");
+            mock.setReleaseDate(LocalDate.now());
+            mock.setTitle("Lord of the rings - The Fellowship of the ring");
+            mock.setDescription(
+                    "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+            mock.setDirector("Peter Jackson");
+            resource.update(mock);
+        });
+
+        assertThrows(ResourceAPIException.class, () -> {
+            final MovieModel mock = new MovieModel();
+            mock.setId(1L);
+            mock.setImdbRate(10l);
+            mock.setDuration(178l);
+            mock.setDirector("Peter Jackson e Rodrigo SS");
+            mock.setReleaseDate(LocalDate.now());
+            mock.setTitle("Lord of the rings - The Fellowship of the ring");
+            mock.setDescription(null);
+
+            mock.setDirector("Peter Jackson");
+            resource.update(mock);
+        });
+
+        assertThrows(ResourceAPIException.class, () -> {
+            final MovieModel mock = new MovieModel();
+            mock.setId(1L);
+            mock.setImdbRate(10l);
+            mock.setDuration(null);
+            mock.setDirector("Peter Jackson e Rodrigo SS");
+            mock.setReleaseDate(LocalDate.now());
+            mock.setTitle("Lord of the rings - The Fellowship of the ring");
+            mock.setDescription(
+                    "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.");
+
+            mock.setDirector("Peter Jackson");
+            resource.update(mock);
+        });
 
     }
 
