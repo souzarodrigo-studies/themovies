@@ -73,6 +73,12 @@ public class MovieServices {
         if (Objects.nonNull(movie.getReleaseDate())) {
             entity.setReleaseDate(movie.getReleaseDate());
         }
+        if (Objects.nonNull(movie.getDescription())) {
+            entity.setDescription(movie.getDescription());
+        }
+        if (Objects.nonNull(movie.getImdbRate())) {
+            entity.setImdbRate(movie.getImdbRate());
+        }
 
         this.repository.update(entity);
 
