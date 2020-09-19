@@ -1,4 +1,4 @@
-package themovies;
+package themovies.repository;
 
 import themovies.database.MovieManager;
 import themovies.models.MovieModel;

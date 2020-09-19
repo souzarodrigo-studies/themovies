@@ -1,4 +1,4 @@
-package themovies;
+package themovies.service;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +38,7 @@ public class MovieServiceTest {
     EntityManager entityManager;
 
     @Test
-    @DisplayName("Testing the execution of the repository returning the data by list")
+    @DisplayName("Should testing service execution by returning data from list all")
     public void listRepositoryTest() {
 
         final MovieModel entityMock = new MovieModel();
@@ -59,7 +59,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    @DisplayName("Testing the execution of the repository returning the data by find by name")
+    @DisplayName("Should testing service execution by returning data by find by name")
     public void findByNameRepositoryTest() {
 
         final MovieModel entity = new MovieModel();
@@ -78,7 +78,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    @DisplayName("Testing the execution of the repository returning the data by find by id")
+    @DisplayName("Should testing service execution by returning data by find by id")
     public void findByIdRepositoryTest() throws ResourceAPIException {
 
         final MovieModel entity = new MovieModel();
@@ -100,7 +100,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    @DisplayName("Testing the execution of the repository returning the data by find by id")
+    @DisplayName("Should testing service execution by returning error by find by id")
     public void findByIdRepositoryTestError() throws ResourceAPIException {
 
         assertThrows(ResourceAPIException.class, () -> {
@@ -123,7 +123,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    @DisplayName("Testing the execution of the repository returning the data by save")
+    @DisplayName("Should testing the execution of the service by saving in the database")
     public void saveRepositoryTest() {
 
         final MovieModel entityMock = new MovieModel();
@@ -150,7 +150,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    @DisplayName("Deve Testar um delete de um filme no banco")
+    @DisplayName("Should testing the execution of the service by deleting")
     public void deleteTest() throws ResourceAPIException {
 
         final MovieModel mock = new MovieModel();
@@ -171,7 +171,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    @DisplayName(" Deve testar a atualizaçao de um filme no banco de dados")
+    @DisplayName("Should testing the update of a movie in the database")
     public void updateTest() throws ResourceAPIException {
 
         final MovieModel mock = new MovieModel();
@@ -196,7 +196,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    @DisplayName(" Deve testar a atualizaçao de um filme no banco de dados")
+    @DisplayName("Should testing test the update of a movie in the database, but returning an exception")
     public void updateTestError() {
 
         assertThrows(ResourceAPIException.class, () -> {
